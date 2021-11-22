@@ -1,0 +1,26 @@
+body {
+    background-color: grey;
+}
+
+h1 {
+    text-align: center;
+}
+#middleContainer {
+    border: 2px solid;
+    min-width: 400px;
+    margin-left: 100px;
+    margin-right: 100px;
+    overflow: hidden;
+    padding-right: 40px;
+}
+
+span {
+    font-weight: bold;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-right: 22px;
+}

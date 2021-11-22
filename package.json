@@ -1,0 +1,23 @@
+{
+  "name": "js-library-zhujia50",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csc309-fall-2021/js-library-zhujia50.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csc309-fall-2021/js-library-zhujia50/issues"
+  },
+  "homepage": "https://github.com/csc309-fall-2021/js-library-zhujia50#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
