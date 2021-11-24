@@ -3,12 +3,11 @@
 let dragging = false
 let resizing = false
 let selectedElement = null
-let elementButtons = {} // { popid: [['closeBtn', element], [resizeBtn, element]], popid2: [[],[]], popid3: [[],[]] }
+let elementButtons = {}
 let id = 0
 
 function popifyElement(selector) {
     const _self = {}
-	_self.selector = selector
 	_self.element = document.querySelector(selector)
 
     _self.createPopUp = function(params) {
@@ -34,16 +33,40 @@ function popifyElement(selector) {
         id += 1
         _self.element.appendChild(popup)
         elementButtons[popup.getAttribute('popid')] = []
+        // { [popid: [['closeBtn', element], [resizeBtn, element]] ], [popid2: [[],[]] ], [popid3: [[],[]] ] }
 
         setAttributes(popup, params)
         positionPopup(_self.element, popup, params)
+        _self.setAbilities(popup, params)
+
+        // hides the element initially
+        popup.style.display = 'none'
+        return popup
+    }
+
+    _self.revealPopup = function(popup) {
+        /* Reveals the popup element */
+        _self.element.addEventListener('click', function() {
+            const popupElements = elementButtons[popup.getAttribute('popid')]
+            for (let i=0; i<popupElements.length; i++) {
+                popupElements[i][1].style.display = ''
+            }
+            popup.style.display = ''
+        })
+    }
+
+    _self.setAbilities = function(popup, params) {
+        /*Allows developer to reset a popup's attributes.
+        params: {
+            persist: boolean
+            draggable: boolean (optional)
+            resizable: boolean (optional)
+            expand: {newHeight: int, newWidth: int} (optional)
+        } */
         params.persist? handlePersist(_self.element, popup) : handleTemporary(_self.element, popup)
         params.draggable? toggleDrag(popup) : false
         params.resizable? handleResize(_self.element, popup) : false
         params.expand? handleExpand(popup, params.expand, params.height, params.width) : false
-
-        // hides the element initially
-        popup.style.display = 'none'
     }
 
     return _self
@@ -208,6 +231,7 @@ function setAttributes(popup, params) {
     // sets correct attribute depending on image or text popup
     if (params.type == 'image') popup.setAttribute('src', params.content)
     if (params.type == 'text') {
+        popup.style.padding = '6px'
         popup.innerText = params.content
         params.backgroundColor ? popup.style.background = params.backgroundColor : popup.style.background = 'white'
         popup.style.overflow = 'hidden'

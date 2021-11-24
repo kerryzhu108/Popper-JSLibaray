@@ -1,7 +1,6 @@
 'use strict'
 
-const ele = popifyElement('#hover')
-ele.createPopUp({
+popifyElement('#hover').createPopUp({
     type:'image',
     content:'https://media.nature.com/w700/magazine-assets/d41586-019-03614-0/d41586-019-03614-0_17409632.jpg',
     height: 80, 
@@ -10,8 +9,8 @@ ele.createPopUp({
     draggable: false,
     resizable: false
 })
-
-popifyElement('#persist').createPopUp({
+const persisterElement = popifyElement('#persist')
+const persisterPopup = persisterElement.createPopUp({
     type:'image',
     content:'https://media.newyorker.com/photos/60902b9e71ad4471831f0e24/16:9/w_1280,c_limit/Rosner-Mushrooms-blewit.jpg',
     height: 80, 
@@ -21,7 +20,6 @@ popifyElement('#persist').createPopUp({
     resizable: false,
     shift: {x: 35, y: -110}
 })
-
 popifyElement('#persistDrag').createPopUp({
     type:'image',
     content:'https://healing-mushrooms.net/wp-content/uploads/2020/06/Psilocybe-Semilanceata.jpg',
@@ -31,7 +29,7 @@ popifyElement('#persistDrag').createPopUp({
     draggable: true,
     shift: {x: -90, y: 10},
 })
-popifyElement('#persistDrag2').createPopUp({
+const otherPopup = popifyElement('#persistDrag2').createPopUp({
     type:'image',
     content: 'https://www.mushroomexpert.com/images/kuo6/panaeolus_foenisecii_01.jpg',
     height: 100,
@@ -40,7 +38,6 @@ popifyElement('#persistDrag2').createPopUp({
     draggable: true,
     shift: {x: -60, y: 0},
 })
-
 popifyElement('#topleft').createPopUp({
     type:'image',
     content: 'https://ychef.files.bbci.co.uk/976x549/p073k7lz.jpg',
@@ -99,7 +96,6 @@ popifyElement('#textBackground').createPopUp({
     fontFamily: 'Garamond',
     fontSize: 11, 
     shift: {x: 60, y: 0},
-    expand: {newHeight: 100, newWidth: 100},
 })
 popifyElement('#resizeText').createPopUp({
     type:'text',
@@ -113,5 +109,24 @@ popifyElement('#resizeText').createPopUp({
     fontFamily: 'Garamond',
     fontSize: 20,
     shift: {x: -140, y: 0},
-    expand: {newHeight: 100, newWidth: 100},
+})
+
+popifyElement('#expand').createPopUp({
+    type:'text',
+    content:'P. azurescens is an espcially unique species of psilocybe. It is among the most potent of the tryptamine-bearing mushrooms.',
+    height: 50,
+    width: 70,
+    persist: true, 
+    draggable: false,
+    resizable: false,
+    backgroundColor: '#6f0000',
+    fontSize: 13,
+    shift: {x: -140, y: -120},
+    expand: {newHeight: 50, newWidth: 280},
+})
+
+popifyElement('#samePopup').revealPopup(otherPopup)
+
+document.querySelector('#changeOther').addEventListener('click', function() {
+    persisterElement.setAbilities(persisterPopup, {persist: true, draggable: true})
 })

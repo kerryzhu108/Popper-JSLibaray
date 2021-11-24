@@ -1,12 +1,11 @@
 body {
-    background-color: grey;
+    background-color: rgb(114, 85, 32);
 }
 
 h1 {
     text-align: center;
 }
 #middleContainer {
-    border: 2px solid;
     min-width: 400px;
     margin-left: 100px;
     margin-right: 100px;
