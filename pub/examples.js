@@ -1,6 +1,7 @@
 'use strict'
 
-popifyElement('#hover').createPopUp({
+const hoverElement = popifyElement('#hover')
+const hoverPopup = hoverElement.createPopUp({
     type:'image',
     content:'https://media.nature.com/w700/magazine-assets/d41586-019-03614-0/d41586-019-03614-0_17409632.jpg',
     height: 80, 
@@ -9,6 +10,8 @@ popifyElement('#hover').createPopUp({
     draggable: false,
     resizable: false
 })
+hoverElement.animate(hoverPopup, {fade: true})
+
 const persisterElement = popifyElement('#persist')
 const persisterPopup = persisterElement.createPopUp({
     type:'image',
@@ -38,16 +41,25 @@ const otherPopup = popifyElement('#persistDrag2').createPopUp({
     draggable: true,
     shift: {x: -60, y: 0},
 })
-popifyElement('#topleft').createPopUp({
+const popupWillAnimate = popifyElement('#topleft')
+const popup3 = popupWillAnimate.createPopUp({
     type:'image',
     content: 'https://ychef.files.bbci.co.uk/976x549/p073k7lz.jpg',
     height: 35,
     width: 45,
-    persist: true, 
+    persist: true,
+    displayInitally: true,
     draggable: true,
     shift: {x: -350, y: -300},
-    resizable: true
+    resizable: true,
 })
+popupWillAnimate.animate(popup3, {
+    float: {speed: 2000, range: '15'},
+    fade: true,
+    expand: true,
+
+})
+
 const images = ['https://www.mushroomexpert.com/images/kuo6/panaeolus_foenisecii_01.jpg',
                 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/278858_2200-732x549.jpg',
                 'https://www.wpr.org/sites/default/files/styles/resp_orig_custom_user_narrow_1x/public/morel_mushroom.jpg?itok=Kz8cQzXX&timestamp=1558375495',]
@@ -60,7 +72,7 @@ for (let i=0; i<3; i++) {
         persist: false, 
         draggable: false,
         shift: {x: 150 * (i+1) + 20 * (i+1), y: -25},
-        resizable: true
+        resizable: true,
     })
 
 }
@@ -111,19 +123,21 @@ popifyElement('#resizeText').createPopUp({
     shift: {x: -140, y: 0},
 })
 
-popifyElement('#expand').createPopUp({
+const expander = popifyElement('#expand')
+const expanderPopup = expander.createPopUp({
     type:'text',
     content:'P. azurescens is an espcially unique species of psilocybe. It is among the most potent of the tryptamine-bearing mushrooms.',
     height: 50,
     width: 70,
     persist: true, 
-    draggable: false,
-    resizable: false,
+    draggable: true,
+    resizable: true,
     backgroundColor: '#6f0000',
     fontSize: 13,
-    shift: {x: -140, y: -120},
-    expand: {newHeight: 50, newWidth: 280},
+    shift: {x: -110, y: -150},
+    expand: {newHeight: 110, newWidth: 280},
 })
+expander.animate(expanderPopup, {expand: {newHeight: 80, newWidth: 280, speed: 1000}})
 
 popifyElement('#samePopup').revealPopup(otherPopup)
 
