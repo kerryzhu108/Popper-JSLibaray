@@ -7,6 +7,10 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, '/pub')))
 
 app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, '/pub/welcome.html'));
+})
+
+app.get('/examples', (req, res) => {
 	res.sendFile(path.join(__dirname, '/pub/examples.html'));
 })
 

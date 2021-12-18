@@ -1,14 +1,27 @@
 body {
     background-color: rgb(114, 85, 32);
+    font-size: 20px;
 }
 
 h1 {
     text-align: center;
 }
+
+#toDocs {
+    float: right;
+    margin-right: 30px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(92, 69, 25);
+    cursor: pointer;
+}
+
 #middleContainer {
     min-width: 400px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
     overflow: hidden;
     padding-right: 40px;
 }
@@ -22,4 +35,48 @@ img {
     width: 150px;
     float: left;
     margin-right: 22px;
+}
+
+#personalizedElement {
+    display: none
+}
+
+.squish {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.box {
+    border: 3px solid #7a3636;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10px;
+    transition: all 0.3s cubic-bezier(.20,.8,.20,1);
+    cursor: pointer;
+    color: rgb(83, 59, 14);
+}
+
+.box:hover {
+    box-shadow: 0 0px 20px rgba(0,0,0,0.12), 0 3px 5px rgba(0,0,0,0.24);
+}
+
+.box-header {
+    color: rgb(54, 40, 13);
+    font-size: 15px;
+    text-align: center;
+}
+
+.box .box-item {
+    font-weight: normal; 
+    font-size: small;
+}
+
+.box .box-arrow {
+    float: right;
+}
+
+#customPopupHTML {
+    background-color: rgb(131, 95, 30);
+    padding: 5px;
+    border-radius: 15px;
 }

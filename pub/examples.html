@@ -5,56 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="examples.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script defer src="pop.js"></script>
+    <script defer src="popper.js"></script>
     <script defer src="examples.js"></script>
  </head>
  <body>
-    <h1> Recognizing Different Species of Mushrooms </h1>
+    <h1> Recognizing Different Species of Mushrooms <span id=toDocs><a>API</a></span></h1>
     <div id='middleContainer'>
-        The following text are just filler, library usage starts from the first bolded text. 
-        There are over 200 species of Psilocybe mushrooms, each possessing visually unique characteristics along with varying
-        levels and ratios of three psychotropic compounds — psilocybin, psilocin, and baeocystin. <br> <br>
-        A few of the most prevalent species are P. azurescens, P. cyanescens, P. semilanceata, and P. cubensis (which is the most widely known and easily
-        cultivated). There are also hundreds of "strains" or "subspecies" which have been genetically isolated and classified
-        by both professional mycologists and recreational enthusiasts. <br><br>
+        This library is all about encapsulation. For this demonstration, the theme will be a webpage that's all about mushrooms. While this is quite sepecific, 
+        I think the way it uses the library's functionalities is a good representation of the how the library will be used in general.
+        <br>
+        <h3>Basic Popup</h3>
+        Psilocybe quebecensis is a moderately active mushroom in the section Aztecorum, having psilocybin and psilocin as active compounds.
+        Hover over <span id=hover>me</span> to take a look at this not so extraordinary shroom.
+
+        <br>
+        <h3>Persisting Popups</h3>
+        P.Quebecensis which is native to Quebec are not to be confused with the popular Liberty Caps found in the east coast.
+        Click <span id=persistDrag1>this</span> to see a picture of P.Quebecensis and  <span id=persistDrag2>this</span> for a picture of a Liberty Cap, and 
+        <span id=persistDrag3>this</span> for a similar but different species. We can compare the small differences
+        between them by dragging them together. Click to drag and click again to drop. Pretty neat eh? Here's the <span id='persistCode'>code sample</span> which can also be moved. 
         
-        While taxonomically these strains are all considered members
-        of their respective species (and most are P. cubensis), they too can differ drastically in appearance, conditions
-        required for cultivation, and potency.
+        <h3>Custom locations, resiability, and animatons</h3>
+        You may have noticed that the previous mushrooms spawned at unusal places, this can be set using the <span id='shiftCode'>shift</span> parameter. For example,
+        we can make this picture of <span id="topleft">Psilocybe quebecensis</span> appear at the top of the page near releveant information! We can also expand it by clicking that
+        little button on the bottom right, moving the curosor, and clicking again to drop. We have also animated it to fade and float using the <span id='animateCode'>animate</span> method.
 
-        <br><br>
-        Hover over <span id=hover>me</span> to see a basic popup. Now click this <span id=persist>element</span> to see a picture
-        that persists after hover. This can be closed by clicking the close box. When there are multiple pictures that persist, the developer
-        can also enable dragging to allow users to carefully compare small <span id=persistDrag>differences</span> among different species of
-        <span id=persistDrag2>mushrooms</span> Try clicking and dragging the two previous popups from the bolded words. Pretty neat eh? You may have noticed
-        that the previous popups spawned at unusal places, this can be set using the shift parameter. For example,
-        we can make this <span id="topleft">mushroom</span> appear at the top of the page! We can also expand it by clicking and dragging that
-        little button on the bottom right.
-
-        <br><br>
-        We can also have this mushroom stew image spawn multiple mushrooms around it, useful for viewing its ingredients or just to see
-        more mushrooms.
+        <br>
+        <h3>Multiple popups</h3>
+        Hover over the mushroom stew to see multiple popups appear around it, useful for viewing its ingredients or just to see
+        more mushrooms. <span id='multiCode'>Sample code</span> (resizable).
         <br><br>
 
         <div id=multiple >
             <img src='https://holycowvegan.net/wp-content/uploads/2017/10/hearty-vegan-mushroom-stew-9.jpg' />
         </div>
-        <p> 
+
+        <h3 class='squish'>Text popups</h3>
+        <p>
             We can also create text popups where we get to specify the <span id=textBackground>background</span> and font. Developers can
             either make the text fit inside the box or have it so that users can <span id='resizeText'>resize</span> the text popup to read more.
-            They can also have it so when a user <span id='expand'>clicks</span> an element and then hovers over its popup, it reveals more text.
-            We can enable multiple elements to reveal the same <span id='samePopup'>popup</span>. The developer is also able to 
-            change the functionalities of already created popups later. Clicking <span id='changeOther'>this</span> we have changed the second
-            popup to now be draggable.
+            They can also have it so when a user <span id='expand'>clicks</span> an element and then hovers over its popup, it automatically expands to reveals more text.
+            <span id='resizableCode'>Code sample</span>
         </p>
-        <br><br><br>
+            <h3>Changing attributes later</h3>
+            The developer is also able to change the functionalities of already created popups later. <span id=notDraggable>This</span> mushroom is
+            not draggable. Clicking <span id='changeOther'>this</span> will now make it draggable! This is done though the <span id='setAbilCode'>.setAbilities</span> method.
+        <br>
+        <h3>Custumoizable elements</h3>
+        Finally we can pass <span id='triggerText'>custom</span> html elements into our popups for even more customization. This example has popups that trigger
+        more popups. <span id='customCode'>To do this</span> we pass in our own html element to .createPopup and for each button inside it, we call .createPopup on it.
 
-        <h3>Psilocybin-Containing Shroom Species</h3>
-        The rest of the text is just lorpem ipsum. The differing Psilocybe species have a much longer and more intensive taxonomical history than the relatively recent distinctions
-        among strains. The first reliable documented case of Psilocybe intoxication occurred in 1799, when a man picked several semilanceata 
-        from the shores of the Thames River in London, and cooked a meal for his family with them. This surprise trip spurred the classification of 
-        a new species of mushroom, which was placed in the genus Agaricus, then moved to Psilocybe in 1871. For the purpose of remaining succinct, 
-        this article focuses on the four species most commonly found in North America.
+        <div id='personalizedElement'>
+            <div class='box-header'>Psilocybe atlantis</div>
+            <ul class='box' id='info'><span class='box-item'>Information</span><span class='box-arrow'>&#11166;</span></ul>
+            <ul class='box' id='pict'><span class='box-item'>Pictures</span><span class='box-arrow'>&#11166;</span></ul>
+            <ul class='box' id='sour'><span class='box-item'>Sources</span><span class='box-arrow'>&#11166;</span></ul>
+        </div>
+
+        <h3>End</h3>
+        The rest of the text is just lorem ipsum, feel free to ignore. <br/> 
+        I was walking alongside the highway and started having some strange and scary thoughts like, "this is it, I'm so glad
+        my life is finally over, freedom is coming soon!" And then I passed a cow field. And there was this one cow standing there by the
+        fence, just staring at me. I continued to walk, and I watched the cow, and it just stood there, immobile, and it continued to
+        stare, and stare, and stare. I completely forgot about myself and my problems and was overcome by the very powerful need to go and
+        talk to this cow.
+
+        So I went up and talked to the cow. And then other cows came, and I talked to them too. They seemed to really enjoy my presence, and
+        before I knew it there were more than a dozen cows standing there mooing at me while I waved and sang and told them they were good
+        cows and gushed over how much I loved them.
     </div>
  </body>
 

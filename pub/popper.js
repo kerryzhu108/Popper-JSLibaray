@@ -1,12 +1,12 @@
 'use strict';
 
 (function(global, document, $) { 
-    let log = console.log
     let dragging = false
     let resizing = false
     let selectedElement = null
     let elementButtons = {}
     let id = 0
+    let log = console.log
 
     function popifyElement(selector) {
         const _self = {}
@@ -16,7 +16,7 @@
         _self.createPopUp = function(params) {
             /**
              * params: {
-             *  type: 'image' or 'text',
+             *  type: 'image' or 'text' pr 'custom,
              *  content: image link or text body
              *  height: int
              *  width: int
@@ -26,6 +26,7 @@
              *  resizable: boolean
              *  fontFamily: valid font family (optional)
              *  fontSize: int (optional)
+             *  padding: int (optional)
              *  backgroundColor: color, default: white (optional) 
              *  expand: {newHeight: int, newWidth: int} (optional)
              *  shift: {x: int y: int} (optional)
@@ -44,19 +45,8 @@
             _self.setAbilities(popup, params)
 
             // hides the element initially unless displayInitially == true
-            params.displayInitally ? _self.element.click() : popup.style.display = 'none'
+            params.displayInitially ? _self.element.click() : popup.style.display = 'none'
             return popup
-        }
-
-        _self.revealPopup = function(popup) {
-            /* Reveals the popup element */
-            _self.element.addEventListener('click', function() {
-                const popupElements = elementButtons[popup.getAttribute('popid')]
-                for (let i=0; i<popupElements.length; i++) {
-                    popupElements[i][1].style.display = ''
-                }
-                popup.style.display = ''
-            })
         }
 
         _self.setAbilities = function(popup, params) {
@@ -156,8 +146,8 @@
         elementButtons[popupElement.getAttribute('popid')].push(['resizeBtn', resizeBtn])
         element.appendChild(resizeBtn)
         resizeBtn.setAttribute('src', 'https://cdn.iconscout.com/icon/free/png-256/resize-minimum-arrow-small-6-16389.png')
-        resizeBtn.style.height = '17px'
-        resizeBtn.style.width = '17px'
+        resizeBtn.style.height = '23px'
+        resizeBtn.style.width = '23px'
         resizeBtn.style.marginTop = popupElement.style.marginTop
         resizeBtn.style.position = 'absolute'
         resizeBtn.style.zIndex = '11'
@@ -265,6 +255,8 @@
 
     let prevHandleMouseEnter = null // to clear preveous event listener if a new one is added
     let prevHandleMouseLeave = null
+    let expanded = []; let normal = []
+    let elementsAnimating = []
     function _handleExpand(popup, newSizes, expand) {
         const popupBtns = elementButtons[popup.getAttribute('popid')] || {length: -1}
         let closeBtn = null
@@ -272,11 +264,23 @@
         const ogHeight = parseInt(popup.style.height)
         const ogWidth = parseInt(popup.style.width)
 
-        function _handleExpandMouseEnter() {
+        function _handleExpandMouseEnter(e) {
+            // expand if element currently not expanded, remove from normal if present
+            const posInNormal = normal.indexOf(e.target) 
+            if(expanded.includes(e.target)) {
+                return
+            } else if (posInNormal) {
+                normal.splice(posInNormal,1)
+            }
+            expanded.push(e.target)
+            if (elementsAnimating.includes(e.target)) {return} // prevents too many animation events from being stacked
+            else {elementsAnimating.push(e.target)}
             $(popup).animate({
                 width: `+=${newSizes.newWidth - ogWidth}`,
                 height: `+=${newSizes.newHeight - ogHeight}`
-            }, expand ? newSizes.speed : 0)
+            }, expand ? newSizes.speed : 0, function() {
+                elementsAnimating.splice(elementsAnimating.indexOf(e.target), 1)
+            })
             for (let i=0; i<popupBtns.length; i++) {
                 if (popupBtns[i][0] == 'closeBtn') {
                     closeBtn = popupBtns[i][1]
@@ -293,15 +297,27 @@
             }
         }
 
-        function _handleExpandMouseLeave() {
-            if (dragging) return
+        function _handleExpandMouseLeave(e) {
+            // shrink if element currently expanded, remove from expanded if present
+            const posInExpanded = expanded.indexOf(e.target) 
+            if(normal.includes(e.target) || dragging || e.toElement instanceof HTMLImageElement) {
+                return
+            } else if (posInExpanded !== null) {
+                expanded.splice(posInExpanded,1)
+            } else if(!normal.includes(e.target)) {
+                normal.push(e.target)
+            }
+            if (elementsAnimating.includes(e.target)) {return}
+            else {elementsAnimating.push(e.target)}
             $(popup).animate({
                 width: `-=${newSizes.newWidth - ogWidth}`,
                 height: `-=${newSizes.newHeight - ogHeight}`
-            }, expand ? newSizes.speed : 0)
+            }, expand ? newSizes.speed : 0, function() {
+                elementsAnimating.splice(elementsAnimating.indexOf(e.target), 1)
+            })
             $(closeBtn).animate({
                 left: `-=${newSizes.newWidth - ogWidth}`
-            }, expand ? newSizes.speed : 0)
+            }, expand ? newSizes.speed : 0, )
             if (resizeBtn) { $(resizeBtn).animate({
                     left: `-=${newSizes.newWidth - ogWidth}`,
                     top: `-=${newSizes.newHeight - ogHeight}`
@@ -337,8 +353,13 @@
             popup.innerText = params.content
             params.backgroundColor ? popup.style.background = params.backgroundColor : popup.style.background = 'white'
             popup.style.overflow = 'hidden'
+            if (params.fontColor) popup.style.color = params.fontColor
             if (params.fontFamily) popup.style.fontFamily = params.fontFamily
             if (params.fontSize) popup.style.fontSize = params.fontSize + 'px'   
+            if (params.padding) popup.style.padding = params.padding + 'px'
+        }
+        if(params.type=='custom') {
+            popup.appendChild(params.content)
         }
     }
 
