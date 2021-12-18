@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>js-library-zhujia50 1.0.0 | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>js-library-zhujia50</h3>
+          <div class='mb1'><code>1.0.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#popifyelement'
+                  class="">
+                  popifyElement
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createpopup'
+                  class="">
+                  createPopUp
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#setabilities'
+                  class="">
+                  setAbilities
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#animate'
+                  class="">
+                  animate
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='popifyelement'>
+      popifyElement
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Like a class, gives selected element abiltiy to create, trigger, mutate, and animate different popups</p>
+
+    <div class='pre p1 fill-light mt0'>popifyElement(selector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>selector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    A css selector for an element that we want to trigger popups with
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        An object that has access to the rest of the functions of the library. Allowing us to create and customize popups for the seleced element.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createpopup'>
+      createPopUp
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Accessed from the object returned by popifyElement, creates a popup initially linked to the selected trigger element</p>
+
+    <div class='pre p1 fill-light mt0'>createPopUp(params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The different properties of the popup
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.type</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>The type of popup, must be either "image" "text" or "custom"
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.content</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a>)</code>
+  </td>
+  <td class='break-word'><span>The popup content, either an image link, text, or an html node depending on the type value
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.height</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>The height of the popup in px
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.width</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>The width of the popup in px
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.persist</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>The popup needs to be manually clicked to close
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.displayInitially</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>Show the popup when the page first loads
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.draggable</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>If the popup can be moved, requires persist=true
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.resizable</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>If the popup can be resized, requires persist=true
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.textOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>Options for a text popup
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.textOptions.fontFamily</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>Text font family
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.textOptions.backgroundColor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;white&#39;</code>)
+  </td>
+  <td class='break-word'><span>Popup background colour
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.textOptions.padding</span> <code class='quiet'>Integer</code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>Padding element containing text
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.textOptions.fontSize</span> <code class='quiet'>Integer</code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>Text font size
+</span></td>
+</tr>
+
+
+  
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.expand</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>How much to expand the popup when a mouse hovers over it, requires persist=true (without animation)
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.expand.newHeight</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if expand parameter is passed in. New height the popup will expand to
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.expand.newWidth</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if expand parameter is passed in. New width the popup will expand to
+</span></td>
+</tr>
+
+
+  
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.shift</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>How much to shift the popup relative to appearing right below the element that triggers it.
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.shift.x</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if shift parameter is passed in. How many pixels to shift right
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.shift.y</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if shift parameter is passed in. How many pixels to shift down
+</span></td>
+</tr>
+
+
+  
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a></code>:
+        Returns the popup DOM element ex &#x3C;img src='
+<a href="http://www.popupimage">www.popupimage</a>
+'...
+ />
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setabilities'>
+      setAbilities
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Set or change the attributes of a particular popup</p>
+
+    <div class='pre p1 fill-light mt0'>setAbilities(popup: <a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>popup</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a>)</code>
+	    The popup element
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    we may change whether it only shows on hover, if it is draggable, resizable, and if it expands
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.persist</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>The popup needs to be manually clicked to close
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.draggable</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>If the popup can be moved, requires persist=true
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.resizable</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>If the popup can be resized, requires persist=true
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.expand</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>The popup needs to be manually clicked to close
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.expand.newHeight</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if expand parameter is passed in. New height the popup will expand to
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.expand.newWidth</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if expand parameter is passed in. New width the popup will expand to
+</span></td>
+</tr>
+
+
+  
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.expand</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>How much to expand the popup when a mouse hovers over it, requires persist=true
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='animate'>
+      animate
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Add animations to a popup</p>
+
+    <div class='pre p1 fill-light mt0'>animate(popup: <a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a>, params: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>popup</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a>)</code>
+	    The popup element
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    Different animations we can add to the popups
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>params.float</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>Whether the popup bobbles up and down
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.float.range</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if float parameter is passed in. How many pixels up and down does the popup move
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>params.float.speed</span> <code class='quiet'>Integer</code>
+  </td>
+  <td class='break-word'><span>Required if float parameter is passed in. How long in miliseconds does it take for the popup to cover the range
+</span></td>
+</tr>
+
+
+  
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+  <div class='py1 quiet mt1 prose-big'>Example</div>
+  <img src="./assets/animationSnippet.jpg" />
+  <img src="./assets/midappearing.jpg" />
+  <br>
+  Picture taken as the popup is fading in after we clicked the html element: <pre>&lt;span id='topLeft'&gt;Psilocybe quebecensis&lt;/span&gt;</pre>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

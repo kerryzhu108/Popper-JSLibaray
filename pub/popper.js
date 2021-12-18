@@ -6,39 +6,49 @@
     let selectedElement = null
     let elementButtons = {}
     let id = 0
-    let log = console.log
 
+    /**
+     * Like a class, gives selected element abiltiy to create, trigger, mutate, and animate different popups
+     * @param {string} selector A css selector for an element that we want to trigger popups with
+     * @returns {Object} An object that has access to the rest of the functions of the library. Allowing us to create and customize popups for the seleced element.
+     */
     function popifyElement(selector) {
         const _self = {}
         _self.element = document.querySelector(selector)
         _self.persist = false
 
+        /**
+         * Accessed from the object returned by popifyElement, creates a popup initially linked to the selected trigger element
+         * @param {Object} params The different properties of the popup 
+         * @param {String} params.type The type of popup, must be either "image" "text" or "custom"
+         * @param {(String|HTMLElement)} params.content The popup content, either an image link, text, or an html node depending on the type value
+         * @param {Integer} params.height The height of the popup in px
+         * @param {Integer} params.width The width of the popup in px
+         * @param {Boolean} [params.persist=false] The popup needs to be manually clicked to close
+         * @param {Boolean} [params.displayInitially=false] Show the popup when the page first loads
+         * @param {Boolean} [params.draggable=false] If the popup can be moved, requires persist=true
+         * @param {Boolean} [params.resizable=false] If the popup can be resized, requires persist=true
+         * @param {Object} [params.textOptions=null] Options for a text popup
+         * @param {String} [params.textOptions.fontFamily=null] Text font family
+         * @param {String} [params.textOptions.backgroundColor='white'] Popup background colour
+         * @param {Integer} [params.textOptions.padding=null] Padding element containing text
+         * @param {Integer} [params.textOptions.fontSize=null] Text font size
+         * @param {Object} [params.expand=null] How much to expand the popup when a mouse hovers over it, requires persist=true (without animation)
+         * @param {Integer} params.expand.newHeight Required if expand parameter is passed in. New height the popup will expand to
+         * @param {Integer} params.expand.newWidth Required if expand parameter is passed in. New width the popup will expand to
+         * @param {Object} [params.shift=null] How much to shift the popup relative to appearing right below the element that triggers it.
+         * @param {Integer} params.shift.x Required if shift parameter is passed in. How many pixels to shift right
+         * @param {Integer} params.shift.y Required if shift parameter is passed in. How many pixels to shift down        
+         * @returns {HTMLElement} Returns the popup DOM element ex <img src='www.popupimage'... />
+         */
         _self.createPopUp = function(params) {
-            /**
-             * params: {
-             *  type: 'image' or 'text' pr 'custom,
-             *  content: image link or text body
-             *  height: int
-             *  width: int
-             *  persist: boolean
-             *  displayInitially: boolean (default false)
-             *  draggable: boolean
-             *  resizable: boolean
-             *  fontFamily: valid font family (optional)
-             *  fontSize: int (optional)
-             *  padding: int (optional)
-             *  backgroundColor: color, default: white (optional) 
-             *  expand: {newHeight: int, newWidth: int} (optional)
-             *  shift: {x: int y: int} (optional)
-             * }
-             */
             const type = params.type == 'image' ? 'img' : 'div'
             const popup = document.createElement(type)
             popup.setAttribute('popid', id) // unique identifier for each popup
             id += 1
             _self.element.appendChild(popup)
             elementButtons[popup.getAttribute('popid')] = []
-            // { [popid: [['closeBtn', element], [resizeBtn, element]] ], [popid2: [[],[]] ], [popid3: [[],[]] ] }
+            // structure: { [popid: [['closeBtn', element], [resizeBtn, element]] ], [popid2: [[],[]] ], [popid3: [[],[]] ] }
 
             _setAttributes(popup, params)
             _positionPopup(_self.element, popup, params)
@@ -48,36 +58,40 @@
             params.displayInitially ? _self.element.click() : popup.style.display = 'none'
             return popup
         }
-
+        /**
+         * Set or change the attributes of a particular popup
+         * @param {HTMLElement} popup The popup element 
+         * @param {Object} params we may change whether it only shows on hover, if it is draggable, resizable, and if it expands
+         * @param {Boolean} [params.persist=false] The popup needs to be manually clicked to close
+         * @param {Boolean} [params.draggable=false] If the popup can be moved, requires persist=true
+         * @param {Boolean} [params.resizable=false] If the popup can be resized, requires persist=true
+         * @param {Boolean} [params.expand=false] The popup needs to be manually clicked to close
+         * @param {Object} [params.expand=null] How much to expand the popup when a mouse hovers over it, requires persist=true
+         * @param {Integer} params.expand.newHeight Required if expand parameter is passed in. New height the popup will expand to
+         * @param {Integer} params.expand.newWidth Required if expand parameter is passed in. New width the popup will expand to
+         */
         _self.setAbilities = function(popup, params) {
-            /*Allows developer to reset a popup's attributes.
-            params: {
-                persist: boolean
-                draggable: boolean (optional)
-                resizable: boolean (optional)
-                expand: {newHeight: int, newWidth: int} (optional)
-            } */
-            _self.persist = params.persist
+            _self.persist = params.persist || false
             params.persist? _handlePersist(_self.element, popup) : _handleTemporary(_self.element, popup)
             params.draggable? _toggleDrag(popup) : false
             params.resizable? _handleResize(_self.element, popup) : false
             params.expand? _handleExpand(popup, params.expand, false) : false
         }
 
+        /**
+         * Add animations to a popup
+         * @param {Object} params Different animations we can add to the popups
+         * @param {HTMLElement} popup The popup element 
+         * @param {Object} [params.float=null] Whether the popup bobbles up and down
+         * @param {Integer} params.float.range Required if float parameter is passed in. How many pixels up and down does the popup move
+         * @param {Integer} params.float.speed Required if float parameter is passed in. How long in miliseconds does it take for the popup to cover the range 
+         */
         _self.animate = function(popup, params) {
-            /*Adds animations for popups
-            params : {
-                float: {speed: int, range: int} (optional)
-                fadeIn: boolean (default false) (optional) 
-                expand: {newHeight: int, newWidth: int} (optional)
-            }
-            */
             params.float? _handleFloat(popup, params.float) : false
             params.fade? _handleFade(_self.element, popup, _self.persist) : false
             params.expand? _handleExpand(popup, params.expand, true) : false
 
         }
-
         return _self
     }
 
@@ -351,12 +365,12 @@
         if (params.type == 'text') {
             popup.style.padding = '6px'
             popup.innerText = params.content
-            params.backgroundColor ? popup.style.background = params.backgroundColor : popup.style.background = 'white'
             popup.style.overflow = 'hidden'
-            if (params.fontColor) popup.style.color = params.fontColor
-            if (params.fontFamily) popup.style.fontFamily = params.fontFamily
-            if (params.fontSize) popup.style.fontSize = params.fontSize + 'px'   
-            if (params.padding) popup.style.padding = params.padding + 'px'
+            params?.textOptions?.backgroundColor ? popup.style.background = params.textOptions.backgroundColor : popup.style.background = 'white'
+            if (params?.textOptions?.fontColor) popup.style.color = params.textOptions.fontColor
+            if (params?.textOptions?.fontFamily) popup.style.fontFamily = params.textOptions.fontFamily
+            if (params?.textOptions?.fontSize) popup.style.fontSize = params.textOptions.fontSize + 'px'   
+            if (params?.textOptions?.padding) popup.style.padding = params.textOptions.padding + 'px'
         }
         if(params.type=='custom') {
             popup.appendChild(params.content)

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const triggerElement = popifyElement('#hover')
 triggerElement.createPopUp({
@@ -103,18 +103,22 @@ const images = ['https://www.mushroomexpert.com/images/kuo6/panaeolus_foenisecii
                 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/278858_2200-732x549.jpg',
                 'https://www.wpr.org/sites/default/files/styles/resp_orig_custom_user_narrow_1x/public/morel_mushroom.jpg?itok=Kz8cQzXX&timestamp=1558375495']
 for (let i=0; i<images.length; i++) {
-    popifyElement('#multiple').createPopUp({
+    const stew = popifyElement('#multiple')
+    const ingrdient = stew.createPopUp({
         type:'image',
         content: images[i],
         height: 150,
         width: 160,
         persist: false, 
         draggable: false,
-        shift: {x: 150 * (i+1) + 20 * (i+1), y: -25},
+        shift: {x: 150 * (i+1) + 20 * (i+1), y: -19},
         resizable: true,
     })
+    stew.animate(ingrdient, {float: {speed: 2000, range: '20'}})
+
 }
-popifyElement('#multiple').createPopUp({
+const stew = popifyElement('#multiple')
+const finalIngredient = stew.createPopUp({
     type:'image',
     content: 'https://www.eatright.org/-/media/eatrightimages/food/planningandprep/cookingtipsandtrends/mushrooms-1049990874.jpg',
     height: 150,
@@ -124,6 +128,7 @@ popifyElement('#multiple').createPopUp({
     shift: {x: 0, y: -195},
     resizable: true
 })
+stew.animate(finalIngredient, {float: {speed: 2000, range: '20'}})
 
 popifyElement('#multiCode').createPopUp({
     type:'image',
@@ -153,9 +158,7 @@ const otherPopup2 = popifyElement('#textBackground').createPopUp({
     persist: false, 
     draggable: false,
     resizable: false,
-    backgroundColor: '#6f0000',
-    fontFamily: 'Garamond',
-    fontSize: 11,
+    textOptions: {backgroundColor: '#6f0000', fontFamily: 'Garamond', fontSize: 11},
     shift: {x: 60, y: 0},
 })
 popifyElement('#resizeText').createPopUp({
@@ -166,9 +169,7 @@ popifyElement('#resizeText').createPopUp({
     persist: true, 
     draggable: false,
     resizable: true,
-    backgroundColor: '#6f0000',
-    fontFamily: 'Garamond',
-    fontSize: 20,
+    textOptions: {backgroundColor: '#6f0000', fontFamily: 'Garamond', fontSize: 20},
     shift: {x: -140, y: 0},
 })
 
@@ -181,8 +182,7 @@ const expanderPopup = expander.createPopUp({
     width: 70,
     persist: true,
     resizable: true,
-    backgroundColor: '#6f0000',
-    fontSize: 13,
+    textOptions: {backgroundColor: '#6f0000', fontSize: 13},
     shift: {x: -110, y: -150},
     expand: {newHeight: 110, newWidth: 280},
 })
@@ -253,9 +253,7 @@ popifyElement('#info1').createPopUp({
     persist: false, 
     draggable: false,
     resizable: false,
-    backgroundColor: 'rgb(131, 95, 30)',
-    fontColor: 'rgb(83, 59, 14)',
-    fontSize: 13,
+    textOptions: {backgroundColor: 'rgb(131, 95, 30)', fontColor: 'rgb(83, 59, 14)', fontSize: 13},
     shift: {x: 215, y: -20},
 })
 
@@ -289,9 +287,7 @@ popifyElement('#sour1').createPopUp({
     persist: false, 
     draggable: false,
     resizable: false,
-    backgroundColor: 'rgb(131, 95, 30)',
-    fontColor: 'rgb(83, 59, 14)',
-    fontSize: 13,
+    textOptions: { backgroundColor: 'rgb(131, 95, 30)', fontColor: 'rgb(83, 59, 14)', fontSize: 13 },
     shift: {x: 215, y: 113},
 })
 
